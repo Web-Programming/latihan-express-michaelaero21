@@ -1,0 +1,32 @@
+<h1>Detail Order</h1><br>
+
+<h5>Anda mengorder  
+<% if (orderDetails.paketWisata === 'Paket Eksplorasi Pantai - Bali') { %>
+    Paket Eksplorasi Pantai - Bali
+<% } else if (orderDetails.paketWisata === 'Paket Heritage Bali - Bali') { %>
+    Paket Heritage Bali - Bali
+<% } else if (orderDetails.paketWisata === 'Paket Petualangan Ubud - Bali') { %>
+    Paket Petualangan Ubud - Bali
+<% } else if (orderDetails.paketWisata === 'Paket Kuliner Bali - Bali') { %>
+    Paket Kuliner Bali - Bali
+<% } else if (orderDetails.paketWisata === 'Paket Wisata Keluarga Bali - Bali') { %>
+    Paket Wisata Keluarga Bali - Bali
+<% } else { %>
+    Paket Bali Adventure - Bali
+<% } %>
+</h5>
+
+<h6>Nama : <%= orderDetails.namaLengkap %></h6>
+<h6>Nomor Telepon : <%= orderDetails.nomorTelepon %></h6>
+<h6>Email : <%= orderDetails.email %></h6>
+<h6>Alamat : <%= orderDetails.alamat %></h6>
+<h6>Tanggal Keberangkatan : <%= orderDetails.tanggalKeberangkatan %></h6>
+<h6>Jumlah Peserta : <%= orderDetails.jumlahPeserta %></h6>
+<h6>Preferensi Makanan : <%= orderDetails.preferensiMakanan || 'Tidak ada' %></h6>
+<h6>Metode Pembayaran : <%= orderDetails.metodePembayaran %></h6>
+<h6>Peserta Tambahan : <%= orderDetails.pesertaTambahan || 'Tidak ada' %></h6>
+<h6>Usia Peserta Tambahan : <%= orderDetails.usiaPeserta || 'Tidak ada' %></h6>
+
+<h5>Total Harga : Rp <%= orderDetails.hargaTotal %></h5><br><br>
+<h6>Terima kasih sudah mengorder paket wisata di website Pariwisata Bali!</h6>
+<a href="/paketwisata">Kembali ke Halaman Paket Wisata</a>

@@ -1,39 +1,6 @@
 <%- include('master', 
   {
-    title : title,
-    body : `
-    <h1>Paket Wisata</h1>
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nama Paket</th>
-            <th scope="col">Kota</th>
-            <th scope="col">Harga</th>
-            <th scope="col">Durasi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Paket A</th>
-            <td>Bandung</td>
-            <td>Rp4.000.000,-</td>
-            <td>3 Hari 2 Malam</td>
-          </tr>
-          <tr>
-            <th scope="row">Paket B</th>
-            <td>Jakarta</td>
-            <td>Rp3.000.000,-</td>
-            <td>2 Hari 1 Malam</td>
-          </tr>
-          <tr>
-            <th scope="row">Paket C</th>
-            <td>Bali</td>
-            <td>Rp5.000.000,-</td>
-            <td>5 Hari 4 Malam</td>
-          </tr>
-        </tbody>
-      </table>
-    `
+    title: title,
+    body: include('components/listpaketwisata')
   })
-
-%>
+-%>

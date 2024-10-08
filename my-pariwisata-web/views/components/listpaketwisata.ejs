@@ -1,0 +1,95 @@
+<h1>Paket Wisata Bali</h1>
+<div class="container">
+    <p>Temukan pengalaman liburan terbaik dengan paket wisata kami di Bali!</p>
+    <ul class="list-group list-group-horizontal-md">
+        <li class="list-group-item">
+            <h5>Paket Eksplorasi Pantai</h5>
+            <p><b>Harga Paket</b><br>Rp 3.500.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket1" class="informasi" style="display: none;">
+                <b>Durasi :</b> 4 hari 3 malam<br>
+                <b>Wisata :</b> Pantai Kuta - Pantai Sanur - Pantai Pandawa - Tanah Lot<br>
+                <b>Harga termasuk penginapan hotel</b>
+            </p>
+        </li>
+        <li class="list-group-item">
+            <h5>Paket Heritage Bali</h5>
+            <p><b>Harga Paket</b><br>Rp 3.000.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket2" class="informasi" style="display: none;">
+                <b>Durasi :</b> 3 hari 2 malam<br>
+                <b>Wisata :</b> Pura Uluwatu - Pura Besakih - Pura Tirta Empul<br>
+                <b>Restoran :</b> Bebek Tepi Sawah - Bumbu Bali - Warung Made<br>
+                <b>Harga termasuk penginapan hotel</b>
+            </p>
+        </li>
+        <li class="list-group-item">
+            <h5>Paket Petualangan Ubud</h5>
+            <p><b>Harga Paket</b><br>Rp 5.000.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket3" class="informasi" style="display: none;">
+                <b>Durasi :</b> 4 hari 3 malam<br>
+                <b>Wisata :</b> Ubud Monkey Forest - Sawah Terasering Tegalalang - Goa Gajah<br>
+                <b>Lunch :</b> All You Can Eat<br>
+                <b>Harga termasuk hotel bintang 5 + breakfast, tour guide, transportasi</b>
+            </p>
+        </li>
+        <li class="list-group-item">
+            <h5>Paket Kuliner Bali</h5>
+            <p><b>Harga Paket</b><br>Rp 4.000.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket4" class="informasi" style="display: none;">
+                <b>Durasi :</b> 3 hari 2 malam<br>
+                <b>Wisata :</b> Pasar Sukawati - Pantai Jimbaran - Pasar Tradisional Ubud<br>
+                <b>Lunch :</b> All You Can Eat<br>
+                <b>Harga termasuk hotel bintang 4 + breakfast</b>
+            </p>
+        </li>
+        <li class="list-group-item">
+            <h5>Paket Wisata Keluarga Bali</h5>
+            <p><b>Harga Paket</b><br>Rp 3.500.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket5" class="informasi" style="display: none;">
+                <b>Durasi :</b> 3 hari 2 malam<br>
+                <b>Wisata :</b> Bali Safari and Marine Park - Waterbom Bali - Tanjung Benoa<br>
+                <b>Harga termasuk penginapan hotel + breakfast</b>
+            </p>
+        </li>
+        <li class="list-group-item">
+            <h5>Paket Bali Adventure</h5>
+            <p><b>Harga Paket</b><br>Rp 4.000.000 / orang</p>
+            <div class="infoSelengkapnya" style="color: blue; cursor: pointer;" onclick="toggleInfo(this)">
+                Klik disini untuk informasi selengkapnya
+            </div>
+            <p id="infoPaket6" class="informasi" style="display: none;">
+                <b>Durasi :</b> 3 hari 2 malam<br>
+                <b>Wisata dan Kuliner :</b> Ayung River Rafting - Pantai Pandawa - Sate Lilit - Lawar Kuwir<br>
+                <b>Harga termasuk hotel + breakfast</b>
+            </p>
+        </li>
+    </ul>
+    <div class="mt-4"></div>
+        <% listpaketwisata.forEach(paket => { %>
+            <li>
+              <%= paket.nama %> : Rp <%= paket.harga %>
+            </li>
+        <% }) %>
+    </div>
+
+  </div>
+<script>
+    function toggleInfo(element) {
+        const info = element.nextElementSibling;
+        info.style.display = info.style.display === "none" ? "block" : "none";
+    }
+</script>

@@ -2,60 +2,63 @@
   {
     title : title,
     body : `
-    <h1>Formulir Pemesanan Paket Wisata </h1>
-    <form>
+    <h1>Formulir Pemesanan Paket Wisata Bali</h1>
+    <form action="/orderdetail" method="POST" onsubmit="hitungTotalHarga()">
+
       <!-- Informasi Pribadi Pemesan -->
       <div class="mb-3">
         <label for="namaLengkap" class="form-label">Nama Lengkap</label>
-        <input type="text" class="form-control" id="namaLengkap" placeholder="Masukkan nama lengkap Anda" required>
+        <input type="text" class="form-control" id="namaLengkap" name="namaLengkap" placeholder="Masukkan nama lengkap Anda" required>
       </div>
       <div class="mb-3">
         <label for="nomorTelepon" class="form-label">Nomor Telepon</label>
-        <input type="tel" class="form-control" id="nomorTelepon" placeholder="Masukkan nomor telepon" required>
+        <input type="tel" class="form-control" id="nomorTelepon" name="nomorTelepon" placeholder="Masukkan nomor telepon" required>
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Alamat Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Masukkan email" required>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" required>
       </div>
       <div class="mb-3">
         <label for="alamat" class="form-label">Alamat</label>
-        <textarea class="form-control" id="alamat" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
+        <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap"></textarea>
       </div>
 
       <!-- Detail Paket Wisata -->
       <div class="mb-3">
         <label for="paketWisata" class="form-label">Pilih Paket Wisata</label>
-        <select class="form-select" id="paketWisata" required>
+        <select class="form-select" id="paketWisata" name="paketWisata" required onchange="hitungTotalHarga()">
           <option selected disabled>Pilih paket wisata</option>
-          <option value="1">Paket A - Bandung</option>
-          <option value="2">Paket B - Jakarta</option>
-          <option value="3">Paket C - Bali</option>
-          
+          <option value="Paket Eksplorasi Pantai - Bali" data-harga="2700000">Paket Eksplorasi Pantai - Bali</option>
+          <option value="Paket Heritage Bali - Bali" data-harga="2500000">Paket Heritage Bali - Bali</option>
+          <option value="Paket Petualangan Ubud - Bali" data-harga="4500000">Paket Petualangan Ubud - Bali</option>
+          <option value="Paket Kuliner Bali - Bali" data-harga="4000000">Paket Kuliner Bali - Bali</option>
+          <option value="Paket Wisata Keluarga Bali - Bali" data-harga="3000000">Paket Wisata Keluarga Bali - Bali</option>
+          <option value="Paket Bali Adventure - Bali" data-harga="3500000">Paket Bali Adventure - Bali</option>
         </select>
       </div>
       <div class="mb-3">
         <label for="tanggalKeberangkatan" class="form-label">Tanggal Keberangkatan</label>
-        <input type="date" class="form-control" id="tanggalKeberangkatan" required>
+        <input type="date" class="form-control" id="tanggalKeberangkatan" name="tanggalKeberangkatan" required>
       </div>
       <div class="mb-3">
         <label for="jumlahPeserta" class="form-label">Jumlah Peserta</label>
-        <input type="number" class="form-control" id="jumlahPeserta" placeholder="Masukkan jumlah peserta" required>
+        <input type="number" class="form-control" id="jumlahPeserta" name="jumlahPeserta" placeholder="Masukkan jumlah peserta" required onchange="hitungTotalHarga()">
       </div>
 
       <!-- Informasi Peserta Lain (opsional) -->
       <div class="mb-3">
         <label for="pesertaTambahan" class="form-label">Nama Peserta Tambahan (opsional)</label>
-        <input type="text" class="form-control" id="pesertaTambahan" placeholder="Masukkan nama peserta tambahan">
+        <input type="text" class="form-control" id="pesertaTambahan" name="pesertaTambahan" placeholder="Masukkan nama peserta tambahan">
       </div>
       <div class="mb-3">
         <label for="usiaPeserta" class="form-label">Usia Peserta Tambahan (opsional)</label>
-        <input type="number" class="form-control" id="usiaPeserta" placeholder="Masukkan usia peserta tambahan">
+        <input type="number" class="form-control" id="usiaPeserta" name="usiaPeserta" placeholder="Masukkan usia peserta tambahan">
       </div>
 
       <!-- Preferensi Perjalanan -->
       <div class="mb-3">
         <label for="preferensiMakanan" class="form-label">Preferensi Makanan</label>
-        <select class="form-select" id="preferensiMakanan">
+        <select class="form-select" id="preferensiMakanan" name="preferensiMakanan">
           <option selected>Pilih preferensi makanan</option>
           <option value="vegetarian">Vegetarian</option>
           <option value="non-vegetarian">Non-Vegetarian</option>
@@ -66,7 +69,7 @@
       <!-- Metode Pembayaran -->
       <div class="mb-3">
         <label for="metodePembayaran" class="form-label">Metode Pembayaran</label>
-        <select class="form-select" id="metodePembayaran" required>
+        <select class="form-select" id="metodePembayaran" name="metodePembayaran" required>
           <option selected disabled>Pilih metode pembayaran</option>
           <option value="transfer">Transfer Bank</option>
           <option value="creditCard">Kartu Kredit</option>
@@ -82,10 +85,44 @@
         </label>
       </div>
 
+      <!-- Input untuk Harga per Orang -->
+      <div class="mb-3">
+        <label for="harga" class="form-label">Harga per Orang</label>
+        <input type="text" class="form-control" id="harga" name="harga" readonly>
+      </div>
+
+      <!-- Input untuk Total Harga -->
+      <div class="mb-3">
+        <label for="hargaTotal" class="form-label">Total Harga</label>
+        <input type="text" class="form-control" id="hargaTotal" name="hargaTotal" readonly>
+      </div>
+
       <!-- Tombol Submit -->
       <button type="submit" class="btn btn-primary">Pesan Sekarang</button>
     </form>
+
+    <script>
+      function formatRupiah(angka) {
+        const formatter = new Intl.NumberFormat('id-ID');
+        return formatter.format(angka);
+      }
+
+      function hitungTotalHarga() {
+        const selectPaket = document.getElementById('paketWisata'); // Update ID to match your form
+        const hargaPerOrangInput = document.getElementById('harga'); // This should show the price per person
+        const totalHargaInput = document.getElementById('hargaTotal'); // This will show the total price
+        const jumlahInput = document.getElementById('jumlahPeserta'); // Update ID to match your form
+
+        const selectedOption = selectPaket.options[selectPaket.selectedIndex];
+        const hargaPerOrang = parseInt(selectedOption.getAttribute('data-harga')) || 0; // Assuming data-harga is set in options
+        const jumlah = parseInt(jumlahInput.value) || 0;
+
+        const totalHarga = hargaPerOrang * jumlah;
+
+        hargaPerOrangInput.value = formatRupiah(hargaPerOrang);
+        totalHargaInput.value = formatRupiah(totalHarga);
+      }
+    </script>
     `
   })
-
 %>
