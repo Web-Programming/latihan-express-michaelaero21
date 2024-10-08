@@ -3,7 +3,7 @@
     title : title,
     body : `
     <h1>Formulir Pemesanan Paket Wisata Bali</h1>
-    <form action="/orderdetail" method="POST" onsubmit="hitungTotalHarga()">
+    <form action="/orderdetail" method="POST" onsubmit="return validateForm()">
 
       <!-- Informasi Pribadi Pemesan -->
       <div class="mb-3">
@@ -28,12 +28,12 @@
         <label for="paketWisata" class="form-label">Pilih Paket Wisata</label>
         <select class="form-select" id="paketWisata" name="paketWisata" required onchange="hitungTotalHarga()">
           <option selected disabled>Pilih paket wisata</option>
-          <option value="Paket Eksplorasi Pantai - Bali" data-harga="2700000">Paket Eksplorasi Pantai - Bali</option>
-          <option value="Paket Heritage Bali - Bali" data-harga="2500000">Paket Heritage Bali - Bali</option>
-          <option value="Paket Petualangan Ubud - Bali" data-harga="4500000">Paket Petualangan Ubud - Bali</option>
+          <option value="Paket Eksplorasi Pantai - Bali" data-harga="3500000">Paket Eksplorasi Pantai - Bali</option>
+          <option value="Paket Heritage Bali - Bali" data-harga="3000000">Paket Heritage Bali - Bali</option>
+          <option value="Paket Petualangan Ubud - Bali" data-harga="5000000">Paket Petualangan Ubud - Bali</option>
           <option value="Paket Kuliner Bali - Bali" data-harga="4000000">Paket Kuliner Bali - Bali</option>
-          <option value="Paket Wisata Keluarga Bali - Bali" data-harga="3000000">Paket Wisata Keluarga Bali - Bali</option>
-          <option value="Paket Bali Adventure - Bali" data-harga="3500000">Paket Bali Adventure - Bali</option>
+          <option value="Paket Wisata Keluarga Bali - Bali" data-harga="3500000">Paket Wisata Keluarga Bali - Bali</option>
+          <option value="Paket Bali Adventure - Bali" data-harga="4000000">Paket Bali Adventure - Bali</option>
         </select>
       </div>
       <div class="mb-3">
@@ -42,7 +42,7 @@
       </div>
       <div class="mb-3">
         <label for="jumlahPeserta" class="form-label">Jumlah Peserta</label>
-        <input type="number" class="form-control" id="jumlahPeserta" name="jumlahPeserta" placeholder="Masukkan jumlah peserta" required onchange="hitungTotalHarga()">
+        <input type="number" class="form-control" id="jumlahPeserta" name="jumlahPeserta" placeholder="Masukkan jumlah peserta" required min="1" onchange="hitungTotalHarga()">
       </div>
 
       <!-- Informasi Peserta Lain (opsional) -->
@@ -108,19 +108,43 @@
       }
 
       function hitungTotalHarga() {
-        const selectPaket = document.getElementById('paketWisata'); // Update ID to match your form
-        const hargaPerOrangInput = document.getElementById('harga'); // This should show the price per person
-        const totalHargaInput = document.getElementById('hargaTotal'); // This will show the total price
-        const jumlahInput = document.getElementById('jumlahPeserta'); // Update ID to match your form
+        const selectPaket = document.getElementById('paketWisata');
+        const hargaPerOrangInput = document.getElementById('harga');
+        const totalHargaInput = document.getElementById('hargaTotal');
+        const jumlahInput = document.getElementById('jumlahPeserta');
 
         const selectedOption = selectPaket.options[selectPaket.selectedIndex];
-        const hargaPerOrang = parseInt(selectedOption.getAttribute('data-harga')) || 0; // Assuming data-harga is set in options
+        const hargaPerOrang = parseInt(selectedOption.getAttribute('data-harga')) || 0;
         const jumlah = parseInt(jumlahInput.value) || 0;
 
         const totalHarga = hargaPerOrang * jumlah;
 
+        // Format and display the prices
         hargaPerOrangInput.value = formatRupiah(hargaPerOrang);
         totalHargaInput.value = formatRupiah(totalHarga);
+      }
+
+      // Trigger calculation on page load in case form reloads
+      window.onload = function() {
+        hitungTotalHarga();
+      };
+
+      // Form validation to ensure no zero values
+      function validateForm() {
+        const jumlahPeserta = parseInt(document.getElementById('jumlahPeserta').value);
+        const totalHarga = parseInt(document.getElementById('hargaTotal').value.replace(/\D/g, ''));
+
+        if (jumlahPeserta < 1) {
+          alert("Jumlah peserta tidak boleh kurang dari 1.");
+          return false;
+        }
+
+        if (totalHarga <= 0) {
+          alert("Total harga tidak boleh nol. Pilih paket wisata dan tentukan jumlah peserta.");
+          return false;
+        }
+
+        return true;
       }
     </script>
     `
