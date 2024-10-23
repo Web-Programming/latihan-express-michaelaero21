@@ -12,3 +12,4 @@ exports.Index = async (req, res) => {
         error});
     }
 }
+module.exports = (Index);
