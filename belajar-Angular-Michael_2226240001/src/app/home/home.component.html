@@ -1,2 +1,13 @@
-<h1>#TEAMPRO7 #TEAMBULLAES</h1>
-<h1>Hari ini kita belajar menggunakan framework angular js</h1>
+<section>
+  <form action="">
+      <input type="text" placeholder="filter by city">
+      <button class="primary" type="button">Search</button>
+  </form>
+</section>
+<section class="results">
+  <app-housing-location
+      *ngFor="let housingLocation of housingLocationList"
+      [housingLocation]="housingLocation"
+  >
+  </app-housing-location>
+</section>
