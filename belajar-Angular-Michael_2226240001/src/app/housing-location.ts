@@ -1,11 +1,10 @@
 export interface HousingLocation {
   id: number,
-  name: String,
-  city: String,
-  state: String,
-  photo: String,
+  name: string,
+  city: string,
+  state: string,
+  photo: string,
   availableUnits: number,
   wifi: boolean,
-  laundry: boolean,
-
+  laundry: boolean
 }
