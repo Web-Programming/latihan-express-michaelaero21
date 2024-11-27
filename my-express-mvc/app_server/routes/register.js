@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const housingController = require("../controllers/controllerHousing");
+const registerController = require("../controllers/controllerRegister.js");
+
 // Fungsi dan Rute Index Kita Gunakan Untuk Memanggil Semua Data dalam Database MongoDB
-router.get("/", housingController.Index);
-router.get("/:id", housingController.Show);
+//router.get("/", registerController.Index);
+router.post("/register", registerController.Insert);
 module.exports = router;

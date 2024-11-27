@@ -1,34 +1,33 @@
 const Housing = require("../models/housing");
 
-// Controller untuk mengambil semua housing
-const Index = async (req, res) => {
+const Index = async(req, res) => {
     try {
         const housing = await Housing.find({});
-        if (!housing || housing.length === 0) {
-            return res.status(400).json({ message: "Collection is empty" });
-        }
         res.status(200).json(housing);
+        if(!housing){
+            res.status(404).json({message: "Collection is Empty"});
+        }
     } catch (error) {
-        res.status(500).json({ message: "Error retrieving housing locations", error });
+        res.status(500).json({ message: "Error retrieving users", error });
     }
+}
+
+const Show = (req, res, next) => {
+    const id = parseInt(req.params.id);
+    Housing
+        .findOne({id:(parseInt(req.params.id))})
+        .then((housing) =>{
+            const responseMessage = housing;
+            res.status(200).json(responseMessage);
+        })
+        .catch((e) => {
+            const responseMessage = {
+                code: 404,
+                success: false,
+                message: "ID " + req.params.id + " Not Found",
+            };
+            res.status(404).json(responseMessage);
+        });
 };
 
-// Controller untuk mengambil housing berdasarkan ID
-const GetHousingById = async (req, res) => {
-    const housingId = Number(req.params.id);  // Mengonversi ID menjadi Number jika idhousing di MongoDB bertipe Number
-
-    try {
-        const housing = await Housing.findOne({ idhousing: housingId });
-
-        if (!housing) {
-            return res.status(404).json({ message: "Housing location not found" });
-        }
-
-        res.status(200).json(housing);
-    } catch (error) {
-        res.status(500).json({ message: "Error retrieving housing location", error });
-    }
-};
-
-
-module.exports = { Index, GetHousingById };
+module.exports = { Index, Show }
