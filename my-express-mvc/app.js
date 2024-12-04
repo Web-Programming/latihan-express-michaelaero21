@@ -14,8 +14,9 @@ var mahasiswasRouter = require('./app_server/routes/mahasiswas');
 var housingRouter = require('./app_server/routes/housing');
 var registerRouter = require('./app_server/routes/register');
 
+var cors = require('cors');
 var app = express();
-
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'ejs');
